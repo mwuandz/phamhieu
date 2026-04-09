@@ -131,7 +131,11 @@
     .achievement,
     .contact-item,
     .skill-item,
-    .hobby-item {
+    .hobby-item,
+    .stat-card,
+    .timeline-item,
+    .quote-box,
+    .gallery-item {
       background: var(--card);
       border: 1px solid var(--line);
       box-shadow: var(--shadow);
@@ -152,6 +156,12 @@
       height: 220px;
       background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(124, 58, 237, 0.10));
       border-radius: 50%;
+      animation: floatBlob 8s ease-in-out infinite;
+    }
+
+    @keyframes floatBlob {
+      0%,100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
     }
 
     .hero-right {
@@ -245,6 +255,11 @@
       border-radius: 24px;
       margin-bottom: 16px;
       box-shadow: 0 12px 30px rgba(37, 99, 235, 0.12);
+      transition: transform 0.35s ease;
+    }
+
+    .avatar:hover {
+      transform: scale(1.03) rotate(-1deg);
     }
 
     .profile-top h2 {
@@ -268,6 +283,11 @@
       border-radius: 18px;
       background: #f8fbff;
       border: 1px solid #e3edf8;
+      transition: 0.25s ease;
+    }
+
+    .contact-row:hover {
+      transform: translateX(4px);
     }
 
     .contact-row small {
@@ -292,7 +312,9 @@
       font-size: 17px;
     }
 
-    .grid-2 {
+    .grid-2,
+    .stats-grid,
+    .story-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 24px;
@@ -319,6 +341,131 @@
       font-size: 16px;
     }
 
+    .visual-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-top: 14px;
+    }
+
+    .stats-grid {
+      margin-top: 24px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stat-card {
+      border-radius: 24px;
+      padding: 22px;
+      text-align: center;
+      transition: 0.25s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .story-grid {
+      margin-top: 24px;
+    }
+
+    .timeline-wrap,
+    .quote-box {
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: linear-gradient(var(--primary), var(--secondary));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 16px 16px 16px 18px;
+      border-radius: 18px;
+      margin-bottom: 14px;
+      background: #fff;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -18px;
+      top: 24px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      box-shadow: 0 0 0 4px #eff6ff;
+    }
+
+    .timeline-item strong,
+    .quote-box strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 18px;
+    }
+
+    .timeline-item span,
+    .quote-text,
+    .quote-sub {
+      color: var(--muted);
+    }
+
+    .quote-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #ffffff, #f8fbff);
+    }
+
+    .quote-mark {
+      font-size: 58px;
+      line-height: 1;
+      color: #bfdbfe;
+      margin-bottom: 10px;
+    }
+
+    .quote-text {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1e293b;
+      min-height: 100px;
+    }
+
+    .quote-sub {
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
     .hobby-grid,
     .achievement-grid,
     .contact-grid,
@@ -333,59 +480,32 @@
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
 
-    .gallery-item {
-      background: var(--card);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      transition: 0.25s ease;
-    }
-
-    .gallery-item:hover {
-      transform: translateY(-5px);
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .gallery-item .caption {
-      padding: 16px;
-    }
-
-    .gallery-item .caption strong {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 18px;
-    }
-
-    .gallery-item .caption span {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
     .hobby-item,
     .achievement,
-    .contact-item {
+    .contact-item,
+    .gallery-item {
       border-radius: var(--radius-lg);
       padding: 22px;
       transition: 0.25s ease;
     }
 
+    .gallery-item {
+      overflow: hidden;
+      padding: 0;
+    }
+
     .hobby-item:hover,
     .achievement:hover,
     .contact-item:hover,
-    .skill-item:hover {
+    .skill-item:hover,
+    .gallery-item:hover {
       transform: translateY(-5px);
     }
 
     .hobby-item strong,
     .achievement strong,
-    .contact-item strong {
+    .contact-item strong,
+    .gallery-item strong {
       display: block;
       font-size: 18px;
       margin-bottom: 8px;
@@ -394,9 +514,26 @@
 
     .hobby-item span,
     .achievement span,
-    .contact-item span {
+    .contact-item span,
+    .gallery-item span {
       color: var(--muted);
       font-size: 15px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.06);
+    }
+
+    .caption {
+      padding: 16px 18px 18px;
     }
 
     .skill-list {
@@ -407,10 +544,15 @@
     .skill-item {
       border-radius: 22px;
       padding: 18px 20px;
+      display: block;
+      transition: 0.25s ease;
+    }
+
+    .skill-top {
       display: flex;
       gap: 14px;
-      align-items: flex-start;
-      transition: 0.25s ease;
+      align-items: center;
+      margin-bottom: 14px;
     }
 
     .skill-no {
@@ -426,10 +568,25 @@
       font-weight: 700;
     }
 
-    .skill-item div:last-child {
-      color: var(--muted);
+    .skill-name {
       font-size: 16px;
-      padding-top: 4px;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .skill-bar {
+      height: 12px;
+      background: #e8eef7;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: inherit;
+      transition: width 1.2s ease;
     }
 
     .footer {
@@ -440,9 +597,22 @@
       font-size: 14px;
     }
 
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     @media (max-width: 920px) {
       .hero,
-      .grid-2 {
+      .grid-2,
+      .story-grid,
+      .stats-grid {
         grid-template-columns: 1fr;
       }
 
@@ -463,8 +633,16 @@
       .achievement,
       .contact-item,
       .hobby-item,
-      .skill-item {
+      .skill-item,
+      .gallery-item,
+      .timeline-wrap,
+      .quote-box,
+      .stat-card {
         padding: 20px;
+      }
+
+      .gallery-item {
+        padding: 0;
       }
 
       .avatar {
@@ -475,7 +653,11 @@
       .intro,
       .section-head p,
       .message p,
-      .skill-item div:last-child {
+      .hobby-item span,
+      .achievement span,
+      .contact-item span,
+      .gallery-item span,
+      .timeline-item span {
         font-size: 15px;
       }
     }
@@ -534,36 +716,88 @@
         </div>
       </div>
 
-      <div class="grid-2" style="margin-top:24px;">
+      <div class="grid-2 reveal" style="margin-top:24px;">
         <div class="card message">
           <h3>Thông điệp cá nhân</h3>
           <p>
             Mình tin rằng sự chân thành, tinh thần trách nhiệm và khả năng học hỏi không ngừng là nền tảng để phát triển bản thân. Mỗi trải nghiệm mới đều là cơ hội để mình trưởng thành hơn và tạo ra giá trị tốt đẹp hơn.
           </p>
         </div>
-        <div class="card">
-          <div class="section-head" style="margin-bottom:16px;">
+        <div class="card visual-card">
+          <div class="section-head" style="margin-bottom:8px;">
             <h2 style="font-size:28px; margin-bottom:10px;">Điểm nổi bật</h2>
             <p>Hòa đồng, năng động, biết lắng nghe và luôn có trách nhiệm với công việc.</p>
           </div>
-          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" alt="Ảnh minh họa chân dung sáng tạo" style="width:100%; height:240px; object-fit:cover; border-radius:20px; border:1px solid var(--line);" />
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" alt="Ảnh minh họa chân dung sáng tạo" />
+        </div>
+      </div>
+
+      <div class="stats-grid reveal">
+        <div class="stat-card">
+          <div class="stat-number" data-target="5">0</div>
+          <div class="stat-label">Sở thích nổi bật</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="5">0</div>
+          <div class="stat-label">Kỹ năng chính</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="100">0</div>
+          <div class="stat-label">Tinh thần học hỏi</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="100">0</div>
+          <div class="stat-label">Năng lượng tích cực</div>
+        </div>
+      </div>
+
+      <div class="story-grid reveal">
+        <div class="timeline-wrap">
+          <div class="section-head" style="margin-bottom:12px;">
+            <h2 style="font-size:28px; margin-bottom:8px;">Hành trình của mình</h2>
+            <p>Một vài nét ngắn gọn để portfolio có cảm giác cá nhân và sinh động hơn.</p>
+          </div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <strong>Bắt đầu từ sự tò mò</strong>
+              <span>Mình luôn thích tìm hiểu những điều mới, từ sở thích hằng ngày đến những trải nghiệm khác biệt.</span>
+            </div>
+            <div class="timeline-item">
+              <strong>Phát triển từ trải nghiệm</strong>
+              <span>Mỗi lần thử sức là một cơ hội để học thêm, trưởng thành hơn và hiểu rõ bản thân hơn.</span>
+            </div>
+            <div class="timeline-item">
+              <strong>Hướng đến phiên bản tốt hơn</strong>
+              <span>Mình muốn giữ sự chân thành, năng động và trách nhiệm trong mọi môi trường học tập và làm việc.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-box">
+          <div>
+            <div class="quote-mark">“</div>
+            <div class="quote-text" id="rotatingQuote">Luôn học hỏi để mỗi ngày trở thành phiên bản tốt hơn của chính mình.</div>
+          </div>
+          <div class="quote-sub">Thông điệp truyền cảm hứng</div>
         </div>
       </div>
     </section>
 
     <section class="page" id="hobbies">
+      <div class="reveal">
       <div class="section-head">
         <h2>Sở thích</h2>
         <p>Những điều mình yêu thích giúp mình giữ được tinh thần tích cực và cân bằng trong cuộc sống.</p>
       </div>
-      <div class="hobby-grid">
+      </div>
+      <div class="hobby-grid reveal">
         <div class="hobby-item"><strong>Thể thao</strong><span>Giúp mình rèn luyện sức khỏe và duy trì năng lượng mỗi ngày.</span></div>
         <div class="hobby-item"><strong>Nghe nhạc</strong><span>Là cách để mình thư giãn và tạo cảm hứng tích cực.</span></div>
         <div class="hobby-item"><strong>Đi du lịch</strong><span>Thích khám phá những nơi mới và trải nghiệm những điều khác biệt.</span></div>
         <div class="hobby-item"><strong>Trải nghiệm</strong><span>Luôn muốn thử sức với những điều mới để học hỏi thêm.</span></div>
         <div class="hobby-item"><strong>Ngủ</strong><span>Một cách nạp lại năng lượng để bắt đầu ngày mới hiệu quả hơn.</span></div>
       </div>
-      <div class="gallery-grid">
+      <div class="gallery-grid reveal">
         <div class="gallery-item">
           <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=900&q=80" alt="Ảnh minh họa thể thao" />
           <div class="caption"><strong>Thể thao</strong><span>Năng lượng, sức bền và tinh thần tích cực.</span></div>
@@ -580,30 +814,47 @@
     </section>
 
     <section class="page" id="skills">
-      <div class="section-head">
+      <div class="section-head reveal">
         <h2>Kỹ năng</h2>
         <p>Những kỹ năng này giúp mình dễ hòa nhập, làm việc hiệu quả và luôn phát triển bản thân.</p>
       </div>
-      <div class="skill-list">
-        <div class="skill-item"><div class="skill-no">1</div><div>Hòa đồng</div></div>
-        <div class="skill-item"><div class="skill-no">2</div><div>Năng động</div></div>
-        <div class="skill-item"><div class="skill-no">3</div><div>Biết chú ý lắng nghe</div></div>
-        <div class="skill-item"><div class="skill-no">4</div><div>Thích tìm tòi và khám phá những điều mới</div></div>
-        <div class="skill-item"><div class="skill-no">5</div><div>Có trách nhiệm với công việc</div></div>
+      <div class="skill-list reveal">
+        <div class="skill-item">
+          <div class="skill-top"><div class="skill-no">1</div><div class="skill-name">Hòa đồng</div></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-top"><div class="skill-no">2</div><div class="skill-name">Năng động</div></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="88%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-top"><div class="skill-no">3</div><div class="skill-name">Biết chú ý lắng nghe</div></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-top"><div class="skill-no">4</div><div class="skill-name">Thích tìm tòi và khám phá những điều mới</div></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="92%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-top"><div class="skill-no">5</div><div class="skill-name">Có trách nhiệm với công việc</div></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="95%"></div></div>
+        </div>
       </div>
     </section>
 
     <section class="page" id="achievements">
+      <div class="reveal">
       <div class="section-head">
         <h2>Thành tựu</h2>
         <p>Phần này được bố trí lại theo kiểu thẻ hiện đại để bạn dễ thêm học vấn, chứng chỉ, giải thưởng hoặc cột mốc cá nhân.</p>
       </div>
-      <div class="achievement-grid">
+      </div>
+      <div class="achievement-grid reveal">
         <div class="achievement"><strong>Học hỏi không ngừng</strong><span>Luôn chủ động tìm hiểu thêm để phát triển kỹ năng và mở rộng góc nhìn.</span></div>
         <div class="achievement"><strong>Tinh thần trách nhiệm</strong><span>Luôn cố gắng hoàn thành tốt công việc được giao với thái độ nghiêm túc.</span></div>
         <div class="achievement"><strong>Năng lượng tích cực</strong><span>Giữ tinh thần lạc quan và sẵn sàng hỗ trợ mọi người xung quanh.</span></div>
       </div>
-      <div class="gallery-grid">
+      <div class="gallery-grid reveal">
         <div class="gallery-item">
           <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Ảnh minh họa làm việc nhóm" />
           <div class="caption"><strong>Làm việc nhóm</strong><span>Sự hòa đồng và phối hợp tốt tạo nên kết quả tích cực.</span></div>
@@ -616,16 +867,18 @@
     </section>
 
     <section class="page" id="contact">
+      <div class="reveal">
       <div class="section-head">
         <h2>Liên hệ</h2>
         <p>Bạn có thể kết nối với mình qua các nền tảng dưới đây.</p>
       </div>
-      <div class="contact-grid">
+      </div>
+      <div class="contact-grid reveal">
         <div class="contact-item"><strong>Facebook</strong><span><a href="https://www.facebook.com/share/18JUaCwTvQ/" target="_blank">Phạm Hiếu</a></span></div>
         <div class="contact-item"><strong>Instagram</strong><span><a href="https://www.instagram.com/_ph.hiew" target="_blank">@_ph.hiew</a></span></div>
         <div class="contact-item"><strong>Gmail</strong><span><a href="mailto:phamngochieu27052k8@gmail.com">phamngochieu27052k8@gmail.com</a></span></div>
       </div>
-      <div class="gallery-grid">
+      <div class="gallery-grid reveal">
         <div class="gallery-item">
           <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="Ảnh minh họa kết nối mạng xã hội" />
           <div class="caption"><strong>Kết nối</strong><span>Sẵn sàng giao lưu, chia sẻ và mở rộng mối quan hệ.</span></div>
@@ -639,6 +892,19 @@
   <script>
     const buttons = document.querySelectorAll('.nav-btn');
     const pages = document.querySelectorAll('.page');
+    const revealItems = document.querySelectorAll('.reveal');
+    const counters = document.querySelectorAll('.stat-number');
+    const skillFills = document.querySelectorAll('.skill-fill');
+    const quoteEl = document.getElementById('rotatingQuote');
+
+    const quotes = [
+      'Luôn học hỏi để mỗi ngày trở thành phiên bản tốt hơn của chính mình.',
+      'Sự năng động và trách nhiệm là điều mình luôn muốn giữ vững.',
+      'Trải nghiệm mới là cách mình mở rộng góc nhìn và trưởng thành hơn.',
+      'Lắng nghe và khám phá là hai điều giúp mình phát triển mỗi ngày.'
+    ];
+
+    let quoteIndex = 0;
 
     function showPage(pageId) {
       pages.forEach(page => page.classList.remove('active'));
@@ -650,11 +916,75 @@
       if (activePage) activePage.classList.add('active');
       if (activeBtn) activeBtn.classList.add('active');
 
+      setTimeout(() => {
+        revealOnView();
+        animateSkills();
+        animateCounters();
+      }, 100);
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     buttons.forEach(button => {
       button.addEventListener('click', () => showPage(button.dataset.page));
+    });
+
+    function revealOnView() {
+      const trigger = window.innerHeight * 0.9;
+      document.querySelectorAll('.page.active .reveal').forEach(item => {
+        const top = item.getBoundingClientRect().top;
+        if (top < trigger) item.classList.add('show');
+      });
+    }
+
+    function animateCounters() {
+      document.querySelectorAll('.page.active .stat-number').forEach(counter => {
+        if (counter.dataset.done === 'true') return;
+        const target = Number(counter.dataset.target || 0);
+        let current = 0;
+        const step = Math.max(1, Math.ceil(target / 40));
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+            counter.dataset.done = 'true';
+          }
+          counter.textContent = current;
+        }, 30);
+      });
+    }
+
+    function animateSkills() {
+      document.querySelectorAll('.page.active .skill-fill').forEach(fill => {
+        if (fill.dataset.done === 'true') return;
+        fill.style.width = fill.dataset.width || '0%';
+        fill.dataset.done = 'true';
+      });
+    }
+
+    function rotateQuote() {
+      if (!quoteEl) return;
+      quoteIndex = (quoteIndex + 1) % quotes.length;
+      quoteEl.style.opacity = '0';
+      quoteEl.style.transform = 'translateY(10px)';
+      setTimeout(() => {
+        quoteEl.textContent = quotes[quoteIndex];
+        quoteEl.style.opacity = '1';
+        quoteEl.style.transform = 'translateY(0)';
+      }, 220);
+    }
+
+    if (quoteEl) {
+      quoteEl.style.transition = 'all 0.35s ease';
+      setInterval(rotateQuote, 3000);
+    }
+
+    window.addEventListener('scroll', revealOnView);
+    window.addEventListener('load', () => {
+      revealOnView();
+      animateCounters();
+      animateSkills();
     });
   </script>
 </body>
