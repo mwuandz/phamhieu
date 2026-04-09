@@ -6,18 +6,19 @@
   <title>Portfolio - Phạm Ngọc Hiếu</title>
   <style>
     :root {
-      --bg: #020617;
-      --panel: rgba(15, 23, 42, 0.78);
-      --panel-soft: rgba(255, 255, 255, 0.06);
-      --text: #ffffff;
-      --muted: #cbd5e1;
-      --muted-2: #94a3b8;
-      --line: rgba(255, 255, 255, 0.12);
-      --accent: #38bdf8;
-      --accent-2: #6366f1;
-      --accent-3: #8b5cf6;
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
-      --radius: 28px;
+      --bg: #f8fafc;
+      --bg-soft: #eef4ff;
+      --text: #0f172a;
+      --muted: #475569;
+      --line: #dbe4f0;
+      --card: #ffffff;
+      --primary: #2563eb;
+      --primary-soft: #dbeafe;
+      --secondary: #7c3aed;
+      --accent: #0ea5e9;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
     }
 
     * {
@@ -27,97 +28,58 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
-      min-height: 100vh;
       background:
-        radial-gradient(circle at top left, rgba(99, 102, 241, 0.16), transparent 30%),
-        radial-gradient(circle at top right, rgba(56, 189, 248, 0.14), transparent 28%),
-        radial-gradient(circle at bottom center, rgba(139, 92, 246, 0.12), transparent 30%),
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.08), transparent 30%),
         var(--bg);
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      filter: blur(70px);
-      z-index: -2;
-      animation: floatGlow 10s ease-in-out infinite alternate;
-      pointer-events: none;
+    a {
+      text-decoration: none;
+      color: inherit;
     }
-
-    body::before {
-      background: rgba(56, 189, 248, 0.14);
-      top: -120px;
-      left: -100px;
-    }
-
-    body::after {
-      background: rgba(139, 92, 246, 0.12);
-      right: -120px;
-      bottom: -120px;
-      animation-duration: 12s;
-    }
-
-    @keyframes floatGlow {
-      from { transform: translateY(0) translateX(0) scale(1); }
-      to { transform: translateY(30px) translateX(20px) scale(1.08); }
-    }
-
-    a { text-decoration: none; color: inherit; }
 
     .container {
-      width: min(1180px, calc(100% - 32px));
+      width: min(1160px, calc(100% - 32px));
       margin: 0 auto;
     }
 
     .navbar {
       position: sticky;
-      top: 16px;
-      z-index: 20;
-      padding-top: 16px;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(12px);
+      background: rgba(248, 250, 252, 0.82);
+      border-bottom: 1px solid rgba(219, 228, 240, 0.9);
     }
 
-    .nav-wrap {
+    .nav-inner {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 16px;
-      padding: 14px 18px;
-      border: 1px solid var(--line);
-      background: rgba(2, 6, 23, 0.65);
-      backdrop-filter: blur(16px);
-      border-radius: 999px;
-      box-shadow: var(--shadow);
+      padding: 16px 0;
     }
 
     .brand {
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.4px;
-      color: #e0f2fe;
-      white-space: nowrap;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      color: var(--primary);
     }
 
     .nav-links {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      justify-content: center;
     }
 
     .nav-btn {
-      border: 1px solid transparent;
+      border: none;
       background: transparent;
       color: var(--muted);
       padding: 10px 14px;
@@ -129,31 +91,29 @@
 
     .nav-btn:hover,
     .nav-btn.active {
-      color: #fff;
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.08);
-      transform: translateY(-1px);
+      background: var(--primary-soft);
+      color: var(--primary);
     }
 
     .page {
       display: none;
-      min-height: calc(100vh - 110px);
-      padding: 34px 0 44px;
-      animation: pageIn 0.55s ease;
+      min-height: calc(100vh - 100px);
+      padding: 34px 0 48px;
+      animation: fadeIn 0.45s ease;
     }
 
     .page.active {
       display: block;
     }
 
-    @keyframes pageIn {
+    @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(18px) scale(0.985);
+        transform: translateY(16px);
       }
       to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
       }
     }
 
@@ -161,51 +121,80 @@
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
       gap: 28px;
-      align-items: center;
-      padding-top: 26px;
+      align-items: stretch;
+      margin-top: 12px;
     }
 
-    .badge {
+    .hero-left,
+    .hero-right,
+    .card,
+    .achievement,
+    .contact-item,
+    .skill-item,
+    .hobby-item {
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-left {
+      border-radius: var(--radius-xl);
+      padding: 42px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left::before {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(124, 58, 237, 0.10));
+      border-radius: 50%;
+    }
+
+    .hero-right {
+      border-radius: var(--radius-xl);
+      padding: 26px;
+    }
+
+    .label {
       display: inline-block;
-      padding: 8px 16px;
+      padding: 8px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.05);
-      color: #bae6fd;
-      font-size: 14px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
       margin-bottom: 16px;
-      animation: pulseSoft 2.4s infinite ease-in-out;
     }
 
-    @keyframes pulseSoft {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.03); }
-    }
-
-    .hero h1 {
-      font-size: clamp(38px, 7vw, 64px);
+    h1 {
+      font-size: clamp(38px, 6vw, 64px);
       line-height: 1.08;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
-    .gradient-text {
-      background: linear-gradient(90deg, #fff, #7dd3fc, #c4b5fd);
+    .gradient {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
     .intro {
-      color: var(--muted);
       font-size: 18px;
+      color: var(--muted);
       max-width: 720px;
-      margin-bottom: 26px;
+      margin-bottom: 24px;
     }
 
-    .buttons {
+    .btns {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
+      margin-top: 8px;
     }
 
     .btn {
@@ -213,7 +202,7 @@
       align-items: center;
       justify-content: center;
       padding: 14px 20px;
-      border-radius: 18px;
+      border-radius: 16px;
       font-size: 14px;
       font-weight: 700;
       transition: 0.25s ease;
@@ -221,116 +210,86 @@
     }
 
     .btn:hover {
-      transform: translateY(-3px) scale(1.01);
-      box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+      transform: translateY(-2px);
     }
 
     .btn-primary {
-      background: white;
-      color: #0f172a;
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.15);
+      background: var(--primary);
       color: white;
     }
 
-    .btn-accent {
-      background: linear-gradient(135deg, rgba(56,189,248,0.18), rgba(99,102,241,0.2));
-      border-color: rgba(56,189,248,0.22);
-      color: #dbeafe;
+    .btn-light {
+      background: white;
+      color: var(--text);
+      border-color: var(--line);
     }
 
-    .card {
-      border: 1px solid var(--line);
-      background: var(--panel);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      transition: 0.3s ease;
+    .btn-soft {
+      background: #f1f5f9;
+      color: var(--text);
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(125, 211, 252, 0.26);
-    }
-
-    .profile-card {
-      padding: 24px;
-    }
-
-    .profile-inner {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3));
-      padding: 1px;
-      border-radius: calc(var(--radius) - 2px);
-    }
-
-    .profile-content {
-      background: rgba(15, 23, 42, 0.94);
-      border-radius: calc(var(--radius) - 3px);
-      padding: 28px;
+    .profile-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
     }
 
     .avatar {
-      width: 168px;
-      height: 168px;
+      width: 160px;
+      height: 160px;
       object-fit: cover;
-      display: block;
-      margin: 0 auto;
-      border-radius: 50%;
-      border: 4px solid rgba(255,255,255,0.12);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.32);
-      animation: avatarFloat 4s ease-in-out infinite;
+      border-radius: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.12);
     }
 
-    @keyframes avatarFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .profile-title {
-      text-align: center;
-      font-size: 28px;
-      font-weight: 700;
-      margin: 18px 0;
-    }
-
-    .contact-box {
-      padding: 16px;
-      margin-top: 14px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: var(--panel-soft);
-      transition: 0.25s ease;
-    }
-
-    .contact-box:hover {
-      transform: translateX(4px);
-      border-color: rgba(125, 211, 252, 0.24);
-    }
-
-    .contact-box p {
-      font-size: 13px;
-      color: var(--muted-2);
+    .profile-top h2 {
+      font-size: 26px;
       margin-bottom: 4px;
     }
 
-    .contact-box a {
-      color: #7dd3fc;
-      word-break: break-all;
-    }
-
-    .section-title {
-      font-size: clamp(30px, 4vw, 46px);
-      margin-bottom: 12px;
-    }
-
-    .section-desc {
+    .profile-top p {
       color: var(--muted);
-      font-size: 17px;
+      font-size: 15px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      padding-top: 18px;
+    }
+
+    .contact-row {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: #f8fbff;
+      border: 1px solid #e3edf8;
+    }
+
+    .contact-row small {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+
+    .section-head {
       margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(30px, 4vw, 46px);
+      margin-bottom: 8px;
+    }
+
+    .section-head p {
+      color: var(--muted);
       max-width: 760px;
+      font-size: 17px;
     }
 
     .grid-2 {
@@ -339,202 +298,152 @@
       gap: 24px;
     }
 
-    .content-card {
+    .card {
+      border-radius: var(--radius-xl);
       padding: 28px;
     }
 
-    .tags,
+    .message {
+      background: linear-gradient(135deg, #eff6ff, #f5f3ff);
+      border: 1px solid #dbe7ff;
+    }
+
+    .message h3 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #1e3a8a;
+    }
+
+    .message p {
+      color: #334155;
+      font-size: 16px;
+    }
+
+    .hobby-grid,
     .achievement-grid,
     .contact-grid {
       display: grid;
-      gap: 16px;
+      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
 
-    .tags {
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    }
-
-    .tag {
-      padding: 18px;
-      border-radius: 22px;
-      background: linear-gradient(135deg, rgba(56,189,248,0.12), rgba(99,102,241,0.14));
-      border: 1px solid rgba(125, 211, 252, 0.12);
+    .hobby-item,
+    .achievement,
+    .contact-item {
+      border-radius: var(--radius-lg);
+      padding: 22px;
       transition: 0.25s ease;
-      text-align: center;
-      font-weight: 700;
-      color: #e0f2fe;
     }
 
-    .tag:hover {
-      transform: translateY(-5px) rotate(-1deg);
+    .hobby-item:hover,
+    .achievement:hover,
+    .contact-item:hover,
+    .skill-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .hobby-item strong,
+    .achievement strong,
+    .contact-item strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .hobby-item span,
+    .achievement span,
+    .contact-item span {
+      color: var(--muted);
+      font-size: 15px;
     }
 
     .skill-list {
       display: grid;
-      gap: 14px;
+      gap: 16px;
     }
 
     .skill-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 18px;
       border-radius: 22px;
-      border: 1px solid var(--line);
-      background: rgba(15, 23, 42, 0.9);
+      padding: 18px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
       transition: 0.25s ease;
     }
 
-    .skill-item:hover {
-      transform: translateX(6px);
-    }
-
-    .skill-number {
-      width: 36px;
-      height: 36px;
+    .skill-no {
+      width: 40px;
+      height: 40px;
       flex-shrink: 0;
-      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
       font-weight: 700;
-      color: #0f172a;
-      background: linear-gradient(135deg, #7dd3fc, #6366f1);
     }
 
-    .achievement-grid,
-    .contact-grid {
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-
-    .mini-card {
-      padding: 24px;
-      border-radius: 24px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.05);
-      box-shadow: var(--shadow);
-      transition: 0.25s ease;
-    }
-
-    .mini-card:hover {
-      transform: translateY(-6px);
-    }
-
-    .mini-card h3 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .mini-card p {
+    .skill-item div:last-child {
       color: var(--muted);
-    }
-
-    .message-box {
-      padding: 32px;
-      border-radius: 32px;
-      border: 1px solid var(--line);
-      background: linear-gradient(90deg, rgba(99,102,241,0.18), rgba(14,165,233,0.16));
-      box-shadow: var(--shadow);
-    }
-
-    .message-box h2 {
-      font-size: 34px;
-      margin-bottom: 12px;
-    }
-
-    .message-box p {
-      color: #e2e8f0;
-      max-width: 860px;
-      font-size: 17px;
+      font-size: 16px;
+      padding-top: 4px;
     }
 
     .footer {
       border-top: 1px solid var(--line);
       text-align: center;
-      color: var(--muted-2);
+      color: var(--muted);
       padding: 24px 16px 32px;
-      margin-top: 16px;
       font-size: 14px;
     }
 
-    .fade-up {
-      animation: fadeUp 0.7s ease both;
-    }
-
-    .delay-1 { animation-delay: 0.08s; }
-    .delay-2 { animation-delay: 0.16s; }
-    .delay-3 { animation-delay: 0.24s; }
-    .delay-4 { animation-delay: 0.32s; }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 940px) {
+    @media (max-width: 920px) {
       .hero,
       .grid-2 {
         grid-template-columns: 1fr;
       }
 
-      .nav-wrap {
-        border-radius: 28px;
+      .nav-inner {
         flex-direction: column;
-        align-items: stretch;
-      }
-
-      .brand {
-        text-align: center;
-      }
-
-      .nav-links {
-        justify-content: center;
-      }
-
-      .page {
-        min-height: auto;
+        align-items: flex-start;
       }
     }
 
     @media (max-width: 640px) {
       .container {
-        width: min(100% - 20px, 1180px);
+        width: min(100% - 20px, 1160px);
       }
 
-      .hero {
-        padding-top: 10px;
-      }
-
-      .profile-content,
-      .content-card,
-      .message-box,
-      .mini-card {
-        padding: 22px;
+      .hero-left,
+      .hero-right,
+      .card,
+      .achievement,
+      .contact-item,
+      .hobby-item,
+      .skill-item {
+        padding: 20px;
       }
 
       .avatar {
-        width: 140px;
-        height: 140px;
+        width: 130px;
+        height: 130px;
       }
 
       .intro,
-      .section-desc,
-      .message-box p {
+      .section-head p,
+      .message p,
+      .skill-item div:last-child {
         font-size: 15px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container navbar">
-    <div class="nav-wrap">
-      <div class="brand">Portfolio • Phạm Ngọc Hiếu</div>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand">Phạm Ngọc Hiếu</div>
       <div class="nav-links">
         <button class="nav-btn active" data-page="home">Trang chủ</button>
         <button class="nav-btn" data-page="hobbies">Sở thích</button>
@@ -543,173 +452,137 @@
         <button class="nav-btn" data-page="contact">Liên hệ</button>
       </div>
     </div>
-  </div>
+  </header>
 
   <main class="container">
     <section class="page active" id="home">
       <div class="hero">
-        <div class="fade-up">
-          <span class="badge">Portfolio cá nhân</span>
-          <h1>Xin chào, mình là <span class="gradient-text">Phạm Ngọc Hiếu</span></h1>
+        <div class="hero-left">
+          <span class="label">Portfolio cá nhân</span>
+          <h1>Xin chào, mình là <span class="gradient">Phạm Ngọc Hiếu</span></h1>
           <p class="intro">
             Mình là người yêu thích sự năng động, luôn sẵn sàng học hỏi, khám phá điều mới và mang đến năng lượng tích cực trong công việc cũng như cuộc sống.
           </p>
-          <div class="buttons">
+          <div class="btns">
             <a class="btn btn-primary" href="https://www.facebook.com/share/18JUaCwTvQ/" target="_blank">Facebook</a>
-            <a class="btn btn-secondary" href="https://www.instagram.com/_ph.hiew" target="_blank">Instagram</a>
-            <a class="btn btn-accent" href="mailto:phamngochieu27052k8@gmail.com">Gửi email</a>
+            <a class="btn btn-light" href="https://www.instagram.com/_ph.hiew" target="_blank">Instagram</a>
+            <a class="btn btn-soft" href="mailto:phamngochieu27052k8@gmail.com">Gửi email</a>
           </div>
         </div>
 
-        <div class="card profile-card fade-up delay-1">
-          <div class="profile-inner">
-            <div class="profile-content">
-              <img class="avatar" src="https://files.catbox.moe/hcp684.jpg" alt="Ảnh đại diện Phạm Ngọc Hiếu" />
-              <div class="profile-title">Thông tin nổi bật</div>
-
-              <div class="contact-box">
-                <p>Facebook</p>
-                <a href="https://www.facebook.com/share/18JUaCwTvQ/" target="_blank">Phạm Hiếu</a>
-              </div>
-
-              <div class="contact-box">
-                <p>Instagram</p>
-                <a href="https://www.instagram.com/_ph.hiew" target="_blank">@_ph.hiew</a>
-              </div>
-
-              <div class="contact-box">
-                <p>Gmail</p>
-                <a href="mailto:phamngochieu27052k8@gmail.com">phamngochieu27052k8@gmail.com</a>
-              </div>
+        <div class="hero-right">
+          <div class="profile-top">
+            <img class="avatar" src="https://files.catbox.moe/hcp684.jpg" alt="Ảnh đại diện Phạm Ngọc Hiếu" />
+            <h2>Thông tin cá nhân</h2>
+            <p>Chủ động, hòa đồng và thích khám phá điều mới</p>
+          </div>
+          <div class="contact-list">
+            <div class="contact-row">
+              <small>Facebook</small>
+              <a href="https://www.facebook.com/share/18JUaCwTvQ/" target="_blank">Phạm Hiếu</a>
+            </div>
+            <div class="contact-row">
+              <small>Instagram</small>
+              <a href="https://www.instagram.com/_ph.hiew" target="_blank">@_ph.hiew</a>
+            </div>
+            <div class="contact-row">
+              <small>Gmail</small>
+              <a href="mailto:phamngochieu27052k8@gmail.com">phamngochieu27052k8@gmail.com</a>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="message-box fade-up delay-2" style="margin-top: 26px;">
-        <h2>Thông điệp cá nhân</h2>
-        <p>
-          Mình tin rằng sự chân thành, tinh thần trách nhiệm và khả năng học hỏi không ngừng là nền tảng để phát triển bản thân. Mỗi trải nghiệm mới đều là cơ hội để mình trưởng thành hơn và tạo ra giá trị tốt đẹp hơn cho những người xung quanh.
-        </p>
+      <div class="grid-2" style="margin-top:24px;">
+        <div class="card message">
+          <h3>Thông điệp cá nhân</h3>
+          <p>
+            Mình tin rằng sự chân thành, tinh thần trách nhiệm và khả năng học hỏi không ngừng là nền tảng để phát triển bản thân. Mỗi trải nghiệm mới đều là cơ hội để mình trưởng thành hơn và tạo ra giá trị tốt đẹp hơn.
+          </p>
+        </div>
+        <div class="card">
+          <div class="section-head" style="margin-bottom:0;">
+            <h2 style="font-size:28px; margin-bottom:10px;">Điểm nổi bật</h2>
+            <p>Hòa đồng, năng động, biết lắng nghe và luôn có trách nhiệm với công việc.</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="page" id="hobbies">
-      <div class="fade-up">
-        <h2 class="section-title">Sở thích</h2>
-        <p class="section-desc">Đây là những điều giúp mình giữ tinh thần thoải mái, năng lượng tích cực và luôn sẵn sàng cho những trải nghiệm mới.</p>
+      <div class="section-head">
+        <h2>Sở thích</h2>
+        <p>Những điều mình yêu thích giúp mình giữ được tinh thần tích cực và cân bằng trong cuộc sống.</p>
       </div>
-      <div class="tags">
-        <div class="tag fade-up delay-1">Thể thao</div>
-        <div class="tag fade-up delay-2">Nghe nhạc</div>
-        <div class="tag fade-up delay-3">Đi du lịch</div>
-        <div class="tag fade-up delay-4">Trải nghiệm</div>
-        <div class="tag fade-up delay-1">Ngủ</div>
+      <div class="hobby-grid">
+        <div class="hobby-item"><strong>Thể thao</strong><span>Giúp mình rèn luyện sức khỏe và duy trì năng lượng mỗi ngày.</span></div>
+        <div class="hobby-item"><strong>Nghe nhạc</strong><span>Là cách để mình thư giãn và tạo cảm hứng tích cực.</span></div>
+        <div class="hobby-item"><strong>Đi du lịch</strong><span>Thích khám phá những nơi mới và trải nghiệm những điều khác biệt.</span></div>
+        <div class="hobby-item"><strong>Trải nghiệm</strong><span>Luôn muốn thử sức với những điều mới để học hỏi thêm.</span></div>
+        <div class="hobby-item"><strong>Ngủ</strong><span>Một cách nạp lại năng lượng để bắt đầu ngày mới hiệu quả hơn.</span></div>
       </div>
     </section>
 
     <section class="page" id="skills">
-      <div class="fade-up">
-        <h2 class="section-title">Kỹ năng nổi bật</h2>
-        <p class="section-desc">Những kỹ năng này giúp mình hòa nhập tốt, làm việc có trách nhiệm và luôn giữ tinh thần học hỏi mỗi ngày.</p>
+      <div class="section-head">
+        <h2>Kỹ năng</h2>
+        <p>Những kỹ năng này giúp mình dễ hòa nhập, làm việc hiệu quả và luôn phát triển bản thân.</p>
       </div>
       <div class="skill-list">
-        <div class="skill-item fade-up delay-1">
-          <div class="skill-number">1</div>
-          <div>Hòa đồng</div>
-        </div>
-        <div class="skill-item fade-up delay-2">
-          <div class="skill-number">2</div>
-          <div>Năng động</div>
-        </div>
-        <div class="skill-item fade-up delay-3">
-          <div class="skill-number">3</div>
-          <div>Biết chú ý lắng nghe</div>
-        </div>
-        <div class="skill-item fade-up delay-4">
-          <div class="skill-number">4</div>
-          <div>Thích tìm tòi và khám phá những điều mới</div>
-        </div>
-        <div class="skill-item fade-up delay-1">
-          <div class="skill-number">5</div>
-          <div>Có trách nhiệm với công việc</div>
-        </div>
+        <div class="skill-item"><div class="skill-no">1</div><div>Hòa đồng</div></div>
+        <div class="skill-item"><div class="skill-no">2</div><div>Năng động</div></div>
+        <div class="skill-item"><div class="skill-no">3</div><div>Biết chú ý lắng nghe</div></div>
+        <div class="skill-item"><div class="skill-no">4</div><div>Thích tìm tòi và khám phá những điều mới</div></div>
+        <div class="skill-item"><div class="skill-no">5</div><div>Có trách nhiệm với công việc</div></div>
       </div>
     </section>
 
     <section class="page" id="achievements">
-      <div class="fade-up">
-        <h2 class="section-title">Thành tựu</h2>
-        <p class="section-desc">Mình đã tách riêng phần này để bạn dễ bổ sung thêm học vấn, chứng chỉ, giải thưởng hoặc các cột mốc cá nhân sau này.</p>
+      <div class="section-head">
+        <h2>Thành tựu</h2>
+        <p>Phần này được bố trí lại theo kiểu thẻ hiện đại để bạn dễ thêm học vấn, chứng chỉ, giải thưởng hoặc cột mốc cá nhân.</p>
       </div>
       <div class="achievement-grid">
-        <div class="mini-card fade-up delay-1">
-          <h3>Học hỏi không ngừng</h3>
-          <p>Luôn chủ động tìm hiểu những điều mới để hoàn thiện bản thân và mở rộng góc nhìn.</p>
-        </div>
-        <div class="mini-card fade-up delay-2">
-          <h3>Tinh thần trách nhiệm</h3>
-          <p>Luôn cố gắng hoàn thành tốt công việc được giao và giữ thái độ nghiêm túc trong mọi việc.</p>
-        </div>
-        <div class="mini-card fade-up delay-3">
-          <h3>Năng lượng tích cực</h3>
-          <p>Duy trì sự năng động, hòa đồng và sẵn sàng hỗ trợ để tạo môi trường làm việc thoải mái hơn.</p>
-        </div>
+        <div class="achievement"><strong>Học hỏi không ngừng</strong><span>Luôn chủ động tìm hiểu thêm để phát triển kỹ năng và mở rộng góc nhìn.</span></div>
+        <div class="achievement"><strong>Tinh thần trách nhiệm</strong><span>Luôn cố gắng hoàn thành tốt công việc được giao với thái độ nghiêm túc.</span></div>
+        <div class="achievement"><strong>Năng lượng tích cực</strong><span>Giữ tinh thần lạc quan và sẵn sàng hỗ trợ mọi người xung quanh.</span></div>
       </div>
     </section>
 
     <section class="page" id="contact">
-      <div class="fade-up">
-        <h2 class="section-title">Liên hệ</h2>
-        <p class="section-desc">Bạn có thể kết nối với mình qua các kênh dưới đây.</p>
+      <div class="section-head">
+        <h2>Liên hệ</h2>
+        <p>Bạn có thể kết nối với mình qua các nền tảng dưới đây.</p>
       </div>
       <div class="contact-grid">
-        <div class="mini-card fade-up delay-1">
-          <h3>Facebook</h3>
-          <p><a href="https://www.facebook.com/share/18JUaCwTvQ/" target="_blank">Phạm Hiếu</a></p>
-        </div>
-        <div class="mini-card fade-up delay-2">
-          <h3>Instagram</h3>
-          <p><a href="https://www.instagram.com/_ph.hiew" target="_blank">@_ph.hiew</a></p>
-        </div>
-        <div class="mini-card fade-up delay-3">
-          <h3>Gmail</h3>
-          <p><a href="mailto:phamngochieu27052k8@gmail.com">phamngochieu27052k8@gmail.com</a></p>
-        </div>
+        <div class="contact-item"><strong>Facebook</strong><span><a href="https://www.facebook.com/share/18JUaCwTvQ/" target="_blank">Phạm Hiếu</a></span></div>
+        <div class="contact-item"><strong>Instagram</strong><span><a href="https://www.instagram.com/_ph.hiew" target="_blank">@_ph.hiew</a></span></div>
+        <div class="contact-item"><strong>Gmail</strong><span><a href="mailto:phamngochieu27052k8@gmail.com">phamngochieu27052k8@gmail.com</a></span></div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    © 2026 Phạm Ngọc Hiếu. Portfolio cá nhân.
-  </footer>
+  <footer class="footer">© 2026 Phạm Ngọc Hiếu. Portfolio cá nhân.</footer>
 
   <script>
     const buttons = document.querySelectorAll('.nav-btn');
     const pages = document.querySelectorAll('.page');
 
     function showPage(pageId) {
-      pages.forEach((page) => {
-        page.classList.remove('active');
-      });
+      pages.forEach(page => page.classList.remove('active'));
+      buttons.forEach(btn => btn.classList.remove('active'));
 
-      buttons.forEach((btn) => {
-        btn.classList.remove('active');
-      });
+      const activePage = document.getElementById(pageId);
+      const activeBtn = document.querySelector(`.nav-btn[data-page="${pageId}"]`);
 
-      const target = document.getElementById(pageId);
-      const activeButton = document.querySelector(`.nav-btn[data-page="${pageId}"]`);
-
-      if (target) target.classList.add('active');
-      if (activeButton) activeButton.classList.add('active');
+      if (activePage) activePage.classList.add('active');
+      if (activeBtn) activeBtn.classList.add('active');
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    buttons.forEach((button) => {
-      button.addEventListener('click', () => {
-        showPage(button.dataset.page);
-      });
+    buttons.forEach(button => {
+      button.addEventListener('click', () => showPage(button.dataset.page));
     });
   </script>
 </body>
