@@ -608,6 +608,69 @@
       transform: translateY(0);
     }
 
+    .zoomable {
+      cursor: pointer;
+    }
+
+    .zoomable img {
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    .zoomable:hover img {
+      transform: scale(1.08);
+      filter: brightness(1.04);
+    }
+
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.88);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s ease;
+      z-index: 9999;
+    }
+
+    .image-modal.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .image-modal img {
+      max-width: min(1000px, 92vw);
+      max-height: 88vh;
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+      transform: scale(0.86);
+      transition: transform 0.3s ease;
+      object-fit: contain;
+    }
+
+    .image-modal.show img {
+      transform: scale(1);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      font-size: 42px;
+      color: white;
+      cursor: pointer;
+      line-height: 1;
+      font-weight: bold;
+      transition: 0.25s ease;
+    }
+
+    .close-modal:hover {
+      transform: scale(1.1);
+      opacity: 0.85;
+    }
+
     @media (max-width: 920px) {
       .hero,
       .grid-2,
@@ -673,6 +736,7 @@
         <button class="nav-btn" data-page="skills">Kỹ năng</button>
         <button class="nav-btn" data-page="achievements">Thành tựu</button>
         <button class="nav-btn" data-page="contact">Liên hệ</button>
+        <button class="nav-btn" data-page="gallery">Gallery</button>
       </div>
     </div>
   </header>
@@ -785,10 +849,10 @@
 
     <section class="page" id="hobbies">
       <div class="reveal">
-      <div class="section-head">
-        <h2>Sở thích</h2>
-        <p>Những điều mình yêu thích giúp mình giữ được tinh thần tích cực và cân bằng trong cuộc sống.</p>
-      </div>
+        <div class="section-head">
+          <h2>Sở thích</h2>
+          <p>Những điều mình yêu thích giúp mình giữ được tinh thần tích cực và cân bằng trong cuộc sống.</p>
+        </div>
       </div>
       <div class="hobby-grid reveal">
         <div class="hobby-item"><strong>Thể thao</strong><span>Giúp mình rèn luyện sức khỏe và duy trì năng lượng mỗi ngày.</span></div>
@@ -844,10 +908,10 @@
 
     <section class="page" id="achievements">
       <div class="reveal">
-      <div class="section-head">
-        <h2>Thành tựu</h2>
-        <p>thành tựu cá nhân</p>
-      </div>
+        <div class="section-head">
+          <h2>Thành tựu</h2>
+          <p>Thành tựu cá nhân</p>
+        </div>
       </div>
       <div class="achievement-grid reveal">
         <div class="achievement"><strong>Học hỏi không ngừng</strong><span>Luôn chủ động tìm hiểu thêm để phát triển kỹ năng và mở rộng góc nhìn.</span></div>
@@ -868,10 +932,10 @@
 
     <section class="page" id="contact">
       <div class="reveal">
-      <div class="section-head">
-        <h2>Liên hệ</h2>
-        <p>Bạn có thể kết nối với mình qua các nền tảng dưới đây.</p>
-      </div>
+        <div class="section-head">
+          <h2>Liên hệ</h2>
+          <p>Bạn có thể kết nối với mình qua các nền tảng dưới đây.</p>
+        </div>
       </div>
       <div class="contact-grid reveal">
         <div class="contact-item"><strong>Facebook</strong><span><a href="https://www.facebook.com/share/18JUaCwTvQ/" target="_blank">Phạm Hiếu</a></span></div>
@@ -885,16 +949,61 @@
         </div>
       </div>
     </section>
+
+    <section class="page" id="gallery">
+      <div class="reveal">
+        <div class="section-head">
+          <h2>Gallery</h2>
+          <p>Một vài hình ảnh nổi bật của mình. Bấm vào ảnh để phóng to.</p>
+        </div>
+      </div>
+
+      <div class="gallery-grid reveal">
+        <div class="gallery-item zoomable">
+          <img src="https://files.catbox.moe/7rvk9r.jpeg" alt="Ảnh gallery 1" />
+          <div class="caption">
+            <strong>Khoảnh khắc năng động</strong>
+            <span>Hình ảnh thể hiện sự tích cực và năng lượng.</span>
+          </div>
+        </div>
+
+        <div class="gallery-item zoomable">
+          <img src="https://files.catbox.moe/jf06re.jpeg" alt="Ảnh gallery 2" />
+          <div class="caption">
+            <strong>Phong cách cá nhân</strong>
+            <span>Một góc nhìn gần gũi và tự nhiên hơn.</span>
+          </div>
+        </div>
+
+        <div class="gallery-item zoomable">
+          <img src="https://files.catbox.moe/ap2x7v.jpeg" alt="Ảnh gallery 3" />
+          <div class="caption">
+            <strong>Trải nghiệm mới</strong>
+            <span>Lưu lại những khoảnh khắc đáng nhớ.</span>
+          </div>
+        </div>
+
+        <div class="gallery-item zoomable">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Ảnh gallery 4" />
+          <div class="caption">
+            <strong>Cảm hứng</strong>
+            <span>Không gian mang lại cảm xúc tích cực và sáng tạo.</span>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">© 2026 Phạm Ngọc Hiếu | 12A3 K42.</footer>
 
+  <div class="image-modal" id="imageModal">
+    <span class="close-modal" id="closeModal">&times;</span>
+    <img id="modalImage" src="" alt="Ảnh phóng to" />
+  </div>
+
   <script>
     const buttons = document.querySelectorAll('.nav-btn');
     const pages = document.querySelectorAll('.page');
-    const revealItems = document.querySelectorAll('.reveal');
-    const counters = document.querySelectorAll('.stat-number');
-    const skillFills = document.querySelectorAll('.skill-fill');
     const quoteEl = document.getElementById('rotatingQuote');
 
     const quotes = [
@@ -916,8 +1025,11 @@
       if (activePage) activePage.classList.add('active');
       if (activeBtn) activeBtn.classList.add('active');
 
+      document.querySelectorAll('.page.active .reveal').forEach(item => {
+        item.classList.add('show');
+      });
+
       setTimeout(() => {
-        revealOnView();
         animateSkills();
         animateCounters();
       }, 100);
@@ -979,6 +1091,38 @@
       quoteEl.style.transition = 'all 0.35s ease';
       setInterval(rotateQuote, 3000);
     }
+
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeModal = document.getElementById('closeModal');
+
+    document.querySelectorAll('.zoomable img').forEach(img => {
+      img.addEventListener('click', () => {
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+        modal.classList.add('show');
+      });
+    });
+
+    if (closeModal) {
+      closeModal.addEventListener('click', () => {
+        modal.classList.remove('show');
+      });
+    }
+
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('show');
+        }
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        modal.classList.remove('show');
+      }
+    });
 
     window.addEventListener('scroll', revealOnView);
     window.addEventListener('load', () => {
